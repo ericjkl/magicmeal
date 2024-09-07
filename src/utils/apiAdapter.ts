@@ -4,7 +4,7 @@ import {setupCache} from 'axios-cache-interceptor';
 import {RecipeResponseType} from "../types/RecipeResponseType.ts";
 
 const axiosInstance = Axios.create();
-const axiosCached = setupCache(axiosInstance);
+const axiosCached = setupCache(axiosInstance, {cacheTakeover: false});
 
 const parseRecipeResponse = (recipeData: RecipeResponseType) => {
     const ingredients = Array.from({length: 20}, (_, i) => ({
