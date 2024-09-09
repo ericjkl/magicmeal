@@ -6,6 +6,7 @@ import {calculateInsights} from "../utils/userServices.ts";
 import {StarFilled} from "@ant-design/icons";
 import "../style/style.scss"
 import NoRecipes from "../components/NoRecipes.tsx";
+import Visualization from "../components/Visualization.tsx";
 
 const starColors = ["#ffad35", "#bdbdbd", "#bf876b"]
 
@@ -17,8 +18,7 @@ const InsightsScreen: React.FC = () => {
 
     return (
         <Container sx={{width: "100%", display: "flex", justifyContent: "stretch", flexDirection: "column"}}>
-            <div className="graphContainer">
-                <Typography align={"center"} sx={{margin: 2}} variant={"h5"}>Your Favorite Meals</Typography>
+            <Visualization title={"Your Favorite Meals"}>
                 {insights.favoriteRecipes.map((recipe, i) =>
                     <Container key={i}
                                sx={{display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 3}}>
@@ -32,9 +32,8 @@ const InsightsScreen: React.FC = () => {
                         <Typography variant={"body2"}>Views: {recipe.viewCount}</Typography>
                     </Container>
                 )}
-            </div>
-            <div className="graphContainer">
-                <Typography align={"center"} sx={{margin: 2}} variant={"h5"}>Ratio of Custom Recipes</Typography>
+            </Visualization>
+            <Visualization title={"Ratio of Custom Recipes"}>
                 <PieChart
                     series={[{
                         arcLabel: (item) => `${(item.value * 100).toFixed(0)}%`,
@@ -47,9 +46,8 @@ const InsightsScreen: React.FC = () => {
                     margin={{left: -100}}
                     height={200}
                 />
-            </div>
-            <div className="graphContainer">
-                <Typography align={"center"} sx={{margin: 2}} variant={"h5"}>Your Favorite Meal Categories</Typography>
+            </Visualization>
+            <Visualization title={"Your Favorite Meal Categories"}>
                 <BarChart
                     xAxis={[{
                         scaleType: 'band',
@@ -63,9 +61,8 @@ const InsightsScreen: React.FC = () => {
                     }]}
                     height={200}
                 />
-            </div>
-            <div className="graphContainer">
-                <Typography align={"center"} sx={{margin: 2}} variant={"h5"}>Your Favorite Ingredients</Typography>
+            </Visualization>
+            <Visualization title={"Your Favorite Ingredients"}>
                 <BarChart
                     xAxis={[{
                         scaleType: 'band',
@@ -79,9 +76,8 @@ const InsightsScreen: React.FC = () => {
                     }]}
                     height={200}
                 />
-            </div>
-            <div className="graphContainer">
-                <Typography align={"center"} sx={{margin: 2}} variant={"h5"}>Vegan / Vegetarian Meals</Typography>
+            </Visualization>
+            <Visualization title={"Vegan / Vegetarian Meals"}>
                 <Gauge
                     value={insights.veganVegetarianCount}
                     valueMax={insights.recipeCount}
@@ -97,7 +93,7 @@ const InsightsScreen: React.FC = () => {
                     text={`${insights.veganVegetarianCount} / ${insights.recipeCount}`}
                     height={200}
                 />
-            </div>
+            </Visualization>
         </Container>
     );
 };
